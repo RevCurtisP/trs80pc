@@ -1,0 +1,93 @@
+# Blackjack 13
+
+In this version of the popular casino card game, the TRS-80 Pocket Computer™
+is the dealer.
+
+## Rules
+
+In this game, the deck contains exactly nine cards, numbered 1 through 9.
+
+Blackjack is played in a series of rounds, called *hands*. In each hand,
+the cards are shuffled then dealt one at a time, face up, to the player and 
+dealer (in that order). In order to win, the total of the player's cards must
+be higher than total of the dealer's cards. If either the player or dealer
+have cards totalling more than 13, they *bust* and their opponent wins.
+
+After each card is dealt, the player has the option to *hit* (take another 
+card) or *stay* (stop receiving cards). The dealer will then hit if it's total
+is less than 10 and the player has not busted. Otherwise, the dealer will stay.
+
+The hand will end automatically if either the player or dealer busts, or the
+dealer's cards total exactly 13.
+
+## Gameplay
+
+**TBD**
+
+## Commented Program Listing
+
+100 "B" PAUSE "BLACKJACK 13": 
+    IF (X<=0)+(X>=1) INPUT "TIME (HHMM):";X:
+    X=X/2400
+105 FOR Z=1 TO 9:
+    A(26+Z)=Z: 
+    NEXT Z:
+    U$="":
+    V$="PLAYER ":
+    W$="DEALER "
+110 "N" PAUSE "SHUFFLING":
+    Y=26: 
+    FOR Z=1 TO 9:
+    A(Z)=0:
+    A(Z+9)=0
+115 X=Π+997X:
+    X=X-INT X:
+    R=INT 9X+27:
+    T=A(R):
+    A(R)=A(Y+Z):
+    A(Y+Z)=T: 
+    NEXT Z
+120 "H" IF P=0 
+      IF M<13 
+        LET Y=Y+1:
+        K=K+1:
+        A(K)=A(Y):
+        M=M+A(Y):
+        P=P+(M=13): 
+        IF M>13 
+        LET Q=1: GOTO "D"
+125 "E" IF Q=0 
+       LET Y=Y+1:
+       L=L+1:
+       A(L+5)=A(Y):
+       N=N+A(Y):
+       P=P+(N=13):
+       Q=N>9: 
+       IF P GOTO "E"
+130 "D" PRINT "P:";A;B;C;D;E;" D:";F;G;H;I;J
+135 "T" R=M>13:
+    S=N>13: 
+    IF R+S 
+     LET T=1-R: 
+     PRINT A$(22+T);"BUSTS!": 
+     GOTO "P"
+140 T=M>N:
+    P=P+QT: 
+    IF P 
+      PRINT A$(23-T);"WINS.": 
+      GOTO "P"
+145 INPUT "(H)IT OR (S)TAY? ";U$: 
+    IF U$="H" GOTO U$
+150 IF U$="S" GOTO U$
+155 GOTO "D"
+160 "S"P=1: 
+    IF Q GOTO "T"
+165 GOTO "E"
+170 "P" A(37-T)=A(37-T)+1: 
+    INPUT "PLAY AGAIN (Y/N)? ";U$: 
+    IF U$="Y" GOTO "N"
+175 "C" PRINT V$;A(36);" ";W$;A(37)
+180 "X" PAUSE "GOODBYE.": 
+    END 
+
+
